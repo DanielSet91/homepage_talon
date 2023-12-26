@@ -40,6 +40,7 @@ def index():
 def register():
     if request.method == "POST":
         username = request.form.get("register-username")
+        username = username.lower()
         password = request.form.get("register-password")
 
         hashed_password = generate_password_hash(password, method="pbkdf2:sha256")
