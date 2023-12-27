@@ -1,0 +1,7 @@
+required modules:
+
+Flask
+flask_login
+flask_sqlalchemy
+werkzeug.security
+secrets
