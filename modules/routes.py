@@ -1,7 +1,9 @@
-from flask import render_template, redirect, request, session, flash
+from flask import render_template, redirect, request, session, flash, url_for
 from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from modules.user import User, db
+from .forms import ContactForm
+from modules.utils import send_email
 
 def configure_routes(app):
     @app.route("/")
@@ -47,11 +49,24 @@ def configure_routes(app):
                 flash("Wrong username or password", "error")
         return render_template("login.html")
 
-    @app.route("/profile")
+    @app.route("/profile", methods=["Get"])
     @login_required
     def profile():
         user = current_user
         return render_template("profile.html", user= user)
+    
+    @app.route("/contact", methods =["GET", "POST"])
+    def contact():
+        form = ContactForm()
+        if request.method == 'POST':
+            print('Form Data:', request.form)
+            print('Form Errors:', form.errors)
+        if form.validate_on_submit():
+            send_email(form)
+            flash('Your message has been sent!', 'success')
+            return redirect(url_for('contact'))
+        return render_template('contact.html', form=form)
+
 
     @app.route("/logout")
     def logout():
