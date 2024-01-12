@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from modules.user import login_manager
+from modules.user import login_manager, db
 from modules.routes import configure_routes
 import secrets
 
@@ -11,8 +11,8 @@ secret_key = secrets.token_hex(16)
 app.config["SECRET_KEY"] = secret_key
 app.config["SESSION_TYPE"] = "filesystem"
 
+db.init_app(app)
 
-db = SQLAlchemy(app)
 login_manager.init_app(app)
 
 configure_routes(app)
