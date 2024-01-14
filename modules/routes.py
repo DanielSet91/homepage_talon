@@ -74,7 +74,7 @@ def configure_routes(app):
                     print(f"Error sending email: {e}")
                     flash('An error occurred while sending the email. Please try again later.', 'danger')
             print("Returning success.html")
-            return render_template(url_for('success'))
+            return redirect(url_for("success"))
         print("Returning index.html")
         return render_template('index.html', form=form)
 
