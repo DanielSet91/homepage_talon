@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Talon Band</title>
+<title>{% block title %}  {% endblock %}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -35,10 +35,9 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <a>Hey {{ current_user.username }}!</a>
     {% endif %}
     <a href="/" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Home</a>
-    <a href="#portfolio" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Portfolio</a>
+    <a href="/#portfolio" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Portfolio</a>
     <a href="#about" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">About</a>
     <a href="#contact" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Contact</a>
-    <a href="/contact" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Contact</a>
 
     {% if current_user.is_authenticated %}
     <a href="/profile" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Profile</a>
@@ -52,19 +51,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </nav>
 
 <!-- Page Content -->
-<div class="w3-main w3-padding-large" style="margin-left:40%">
-
-  <!-- Menu icon to open sidebar -->
-  <span class="w3-button w3-top w3-white w3-xxlarge w3-text-grey w3-hover-text-black" style="width:auto;right:0;" onclick="openNav()"><i class="fa fa-bars"></i></span>
-  <div class="introduction">
-    <img src="/static/intro_show.jpg" alt="introduction">
-  </div>
 
   <!-- Header -->
   <header class="w3-container w3-center" style="padding:128px 16px" id="home">
     <h1 class="w3-jumbo"><b>Talon Band</b></h1>
     <p>Progressive Rock</p>
   </header>
+  {% block content %} {% endblock %}
 
   <!-- Footer -->
   <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" style="margin:-24px">

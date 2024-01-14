@@ -30,6 +30,7 @@ def configure_routes(app):
             db.session.add(new_user)
             db.session.commit()
 
+            flash("Registration successful! Please log in.", "success")
             return redirect("/login")
 
         return render_template("register.html")
@@ -57,16 +58,29 @@ def configure_routes(app):
     
     @app.route("/contact", methods =["GET", "POST"])
     def contact():
-        form = ContactForm()
-        if request.method == 'POST':
-            print('Form Data:', request.form)
-            print('Form Errors:', form.errors)
-        if form.validate_on_submit():
-            send_email(form)
-            flash('Your message has been sent!', 'success')
-            return redirect(url_for('contact'))
-        return render_template('contact.html', form=form)
+        print("Entering /contact route")
+        if request.method == "POST":
+            print("Inside POST block")
+            form = ContactForm(request.form)
+            name = form.name.data
+            email = form.email.data
+            subject = form.subject.data
+            message = form.message.data
+            if form.validate():
+                try:
+                    send_email(form)
+                    flash('Your message has been sent!', 'success')
+                except Exception as e:
+                    print(f"Error sending email: {e}")
+                    flash('An error occurred while sending the email. Please try again later.', 'danger')
+            print("Returning success.html")
+            return render_template(url_for('success'))
+        print("Returning index.html")
+        return render_template('index.html', form=form)
 
+    @app.route("/success")
+    def success():
+        return render_template('success.html')
 
     @app.route("/logout")
     def logout():
