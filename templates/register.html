@@ -1,16 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %} Register {% endblock %}
+  
+{% block head %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
     <link rel="stylesheet" href="static/styles.css">
 </head>
+{% endblock %}
 <body>
-
+{% block content %}
 <div class="register-container">
-    <div class="register-box">
-        <h2>Register</h2>
+    <div class="register-box" >
+        <h2 style="position: fixed; right: 670px; top: 175px;">Register</h2>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
           <ul class="flash">
@@ -20,7 +22,7 @@
           </ul>
         {% endif %}
       {% endwith %}
-        <form action="/register" method="post">
+        <form action="/register" method="post" style=" position: fixed; right: 550px; top: 250px;">
             <label for="register-username">Username:</label>
             <input type="user" id="register-username" name="register-username" required>
 
@@ -35,4 +37,4 @@
 </div>
 
 </body>
-</html>
+{% endblock %}

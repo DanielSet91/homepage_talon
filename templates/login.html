@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %} Login {% endblock %}
+  
 
+{% block head %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
-<body>
+{% endblock %}
 
-<div class="login-container">
+
+<body>
+{% block content %}
+<div class="login-container"style=" position: fixed; right: 450px; top: 150px;">
     <div class="login-box">
         <h2>Login</h2>
         {% with messages = get_flashed_messages() %}
@@ -35,6 +40,5 @@
     </div>
     
 </div>
-
 </body>
-</html>
+{% endblock %}

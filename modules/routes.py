@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, session, flash, url_for
+from flask import render_template, redirect, request, session, flash, url_for, current_app
 from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from modules.user import User, db
@@ -81,7 +81,7 @@ def configure_routes(app):
     @app.route("/success")
     def success():
         return render_template('success.html')
-
+    
     @app.route("/logout")
     def logout():
         logout_user()

@@ -25,12 +25,16 @@ footer {
   width: 100%;
   margin: 0;
 }
+
 </style>
+<div>
+{% block head %} {% endblock %}
+</div>
 <body>
 
 <!-- Hidden Sidebar (reveals when clicked on menu icon)-->
 
-<nav class="w3-sidebar w3-hide-medium w3-hide-small" style="width:40%">
+<nav class="w3-sidebar w3-hide-medium w3-hide-small" style="width:40%; position: fixed; left: 0;">
   <div class="bgimg"></div>
 </nav>
 <!-- Sidebar with image -->
@@ -45,8 +49,8 @@ footer {
     {% endif %}
     <a href="/" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Home</a>
     <a href="/#portfolio" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Portfolio</a>
-    <a href="#about" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">About</a>
-    <a href="#contact" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Contact</a>
+    <a href="/#about" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">About</a>
+    <a href="/#contact" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Contact</a>
 
     {% if current_user.is_authenticated %}
     <a href="/profile" class="w3-bar-item w3-button w3-text-grey w3-hover-black" onclick="closeNav()">Profile</a>
@@ -58,9 +62,12 @@ footer {
     
   </div>
 </nav>
+<div class="w3-main w3-padding-large" style="margin-left:40%">
 
+  <!-- Menu icon to open sidebar -->
+  <span class="w3-button w3-top w3-white w3-xxlarge w3-text-grey w3-hover-text-black" style="width:auto;right:0;" onclick="openNav()"><i class="fa fa-bars"></i></span>
 <!-- Page Content -->
-
+</div>
   <!-- Header -->
   <header class="w3-container w3-center" style="padding:128px 32px" id="home">
     <h1 class="w3-jumbo" style="text-align: right; margin-right: 200px;"><b>{% block header %} {% endblock %}</b></h1>
@@ -68,13 +75,15 @@ footer {
   {% block content %} {% endblock %}
 
   <!-- Footer -->
-  <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" >
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" style="margin: 0px 300px; position: fixed; left: 0;">
+    <a href="https://www.facebook.com/profile.php?id=100077639394251">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+    <a href="https://www.instagram.com/talon.band/">
+    <i class="fa fa-instagram w3-hover-opacity"></i></a>
+    <a href="https://soundcloud.com/tal-alon-892158238">
+    <i class="fa fa-soundcloud w3-hover-opacity"></i></a>
+    <a href="https://talon-band.bandcamp.com/track/the-worm">
+    <i class="fa fa-bandcamp w3-hover-opacity"></i></a>
     <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
   <!-- End footer -->
   </footer>
