@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <title>{% block title %}  {% endblock %}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,6 +15,15 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   background-size: cover;
   background-image: url('/static/talon_logo.jpg');
   min-height: 100%;
+}
+body {
+  overflow: hidden;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
 }
 </style>
 <body>
@@ -53,14 +62,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Page Content -->
 
   <!-- Header -->
-  <header class="w3-container w3-center" style="padding:128px 16px" id="home">
-    <h1 class="w3-jumbo"><b>Talon Band</b></h1>
-    <p>Progressive Rock</p>
+  <header class="w3-container w3-center" style="padding:128px 32px" id="home">
+    <h1 class="w3-jumbo" style="text-align: right; margin-right: 200px;"><b>{% block header %} {% endblock %}</b></h1>
   </header>
   {% block content %} {% endblock %}
 
   <!-- Footer -->
-  <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" style="margin:-24px">
+  <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" >
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
     <i class="fa fa-instagram w3-hover-opacity"></i>
     <i class="fa fa-snapchat w3-hover-opacity"></i>
