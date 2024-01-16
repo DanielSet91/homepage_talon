@@ -3,7 +3,8 @@ from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from modules.user import User, db
 from .forms import ContactForm
-from modules.utils import send_email
+from flask_mail import Message
+from modules.utilys import mail
 
 def configure_routes(app):
     @app.route("/")
@@ -60,22 +61,17 @@ def configure_routes(app):
     def contact():
         print("Entering /contact route")
         if request.method == "POST":
-            print("Inside POST block")
-            form = ContactForm(request.form)
-            name = form.name.data
-            email = form.email.data
-            subject = form.subject.data
-            message = form.message.data
-            if form.validate():
-                try:
-                    send_email(form)
-                    flash('Your message has been sent!', 'success')
-                except Exception as e:
-                    print(f"Error sending email: {e}")
-                    flash('An error occurred while sending the email. Please try again later.', 'danger')
-            print("Returning success.html")
-            return redirect(url_for("success"))
-        print("Returning index.html")
+            form = ContactForm()
+            sender=request.form['Email']
+            name = request.form['Name']
+            subject = request.form['Subject']
+            body = f'Sender: {sender}\nName: {name}\n\n{request.form["Message"]}'
+            msg = Message(subject=subject, recipients=['elessar.nazgul@gmail.com'], body=body)
+            try:
+                mail.send(msg)
+                return render_template('success.html')
+            except Exception as e:
+                return f'Error: {str(e)}'
         return render_template('index.html', form=form)
 
     @app.route("/success")
