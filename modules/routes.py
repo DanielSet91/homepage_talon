@@ -78,6 +78,10 @@ def configure_routes(app):
     def success():
         return render_template('success.html')
     
+    @app.route("/music")
+    def music():
+        return render_template("music.html")
+    
     @app.route("/logout")
     def logout():
         logout_user()
