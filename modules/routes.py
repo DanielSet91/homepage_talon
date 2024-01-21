@@ -5,6 +5,7 @@ from modules.user import User, db
 from .forms import ContactForm
 from flask_mail import Message
 from modules.utilys import mail
+from modules.userinfo import db as userInfo
 
 def configure_routes(app):
     @app.route("/")
@@ -56,6 +57,20 @@ def configure_routes(app):
     def profile():
         user = current_user
         return render_template("profile.html", user= user)
+    
+    @app.route('/update_user_info', methods=["POST"])
+    def update_user_info():
+        user_full_name = request.form.get('user_full_name')
+        user_email = request.form.get('user_email')
+
+        user_info = userInfo.Query.first()
+
+        user_info.name = user_full_name
+        user_info.email = user_email
+
+        db.session.commit()
+
+        return(redirect(url_for('profile')))
     
     @app.route("/contact", methods =["GET", "POST"])
     def contact():

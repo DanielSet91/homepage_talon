@@ -32,7 +32,7 @@ footer {
 </nav>
 <!-- Sidebar with image -->
 
-<nav class="w3-sidebar w3-black w3-animate-right w3-xxlarge" style="display:none;padding-top:150px;right:0;z-index:2" id="mySidebar">
+<nav class="w3-sidebar w3-black w3-animate-right w3-xxlarge" style="display:none;padding-top:150px;right:0;z-index:1000" id="mySidebar">
   <a href="javascript:void(0)" onclick="closeNav()" class="w3-button w3-black w3-xxxlarge w3-display-topright" style="padding:0 12px;">
     <i class="fa fa-remove"></i>
   </a>
@@ -69,7 +69,8 @@ footer {
   {% block content %} {% endblock %}
 
   <!-- Footer -->
-  <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-opacity w3-xlarge" style="margin: 0px 0px; position: fixed; left: 0px;">
+  <footer class="w3-container w3-padding-64 w3-light-grey w3-center w3-center w3-xlarge" style="margin: 0; position: fixed; left: 0px; width: 100%">
+    
     <a href="https://www.facebook.com/profile.php?id=100077639394251">
     <i class="fa fa-facebook-official w3-hover-opacity"></i></a>
     <a href="https://www.instagram.com/talon.band/">
@@ -81,14 +82,13 @@ footer {
     <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
   <!-- End footer -->
   </footer>
-  
 <!-- END PAGE CONTENT -->
 </div>
 
 <script>
 // Open and close sidebar
 function openNav() {
-  document.getElementById("mySidebar").style.width = "60%";
+  document.getElementById("mySidebar").style.width = "50%";
   document.getElementById("mySidebar").style.display = "block";
 }
 

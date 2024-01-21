@@ -2,10 +2,10 @@ from flask import Flask
 from modules.user import login_manager, db
 from modules.routes import configure_routes
 import secrets
-from flask_mail import Mail
 import os
-from dotenv import load_dotenv
 from modules.utilys import mail
+from flask_migrate import Migrate
+from modules.userinfo import db as userinfo_db
 
 app = Flask(__name__, template_folder='templates')
 
@@ -31,6 +31,7 @@ login_manager.init_app(app)
 configure_routes(app)
 
 mail.init_app(app)
+migrate = Migrate(app, db)
 
 if __name__ == "__main__":
     with app.app_context():
