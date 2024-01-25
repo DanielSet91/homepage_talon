@@ -23,6 +23,7 @@
         {% endif %}
       {% endwith %}
         <form action="/register" method="post" style=" position: fixed; right: 550px; top: 250px;">
+          <input type = "hidden" name="csrf_token" value = "{{ csrf_token() }}">
             <label for="register-username">Username:</label>
             <input type="user" id="register-username" name="register-username" required>
 

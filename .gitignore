@@ -4,3 +4,4 @@ modules/__pycache__/user.cpython-312.pyc
 modules/__pycache__/forms.cpython-312.pyc
 *.pyc
 .env
+test.py

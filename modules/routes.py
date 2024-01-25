@@ -1,11 +1,10 @@
 from flask import render_template, redirect, request, session, flash, url_for, current_app
 from flask_login import current_user, login_user, login_required, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from modules.user import User, db
+from modules.user import User, db, UserInfo
 from .forms import ContactForm
 from flask_mail import Message
 from modules.utilys import mail
-from modules.userinfo import db as userInfo
 
 def configure_routes(app):
     @app.route("/")
@@ -52,22 +51,27 @@ def configure_routes(app):
                 flash("Wrong username or password", "error")
         return render_template("login.html")
 
-    @app.route("/profile", methods=["Get"])
+    @app.route("/profile", methods=["GET"])
     @login_required
     def profile():
         user = current_user
-        return render_template("profile.html", user= user)
+        user_info = UserInfo.query.filter_by(user_id = current_user.id).first()
+        return render_template("profile.html", user= user, user_info = user_info)
     
     @app.route('/update_user_info', methods=["POST"])
     def update_user_info():
         user_full_name = request.form.get('user_full_name')
         user_email = request.form.get('user_email')
 
-        user_info = userInfo.Query.first()
+        user_info = UserInfo.query.filter_by(user_id=current_user.id).first()
+
+        if user_info is None:
+            user_info = UserInfo(user_id = current_user.id)
 
         user_info.name = user_full_name
         user_info.email = user_email
 
+        db.session.add(user_info)
         db.session.commit()
 
         return(redirect(url_for('profile')))
