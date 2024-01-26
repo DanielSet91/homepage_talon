@@ -4,7 +4,6 @@ from flask_mysqldb import MySQL
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect
-from dotenv import load_dotenv
 from modules.utilys import mail
 import os
 import secrets

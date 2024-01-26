@@ -21,6 +21,11 @@ class UserInfo(db.Model):
     favorite_genres = db.Column(db.String(255), nullable=True)
     favorite_instrument = db.Column(db.String(255), nullable=True)
     job = db.Column(db.String(255), nullable=True)
+    
+    twitter = db.Column(db.String(255), nullable=True)
+    facebook = db.Column(db.String(255), nullable=True)
+    instagram = db.Column(db.String(255), nullable=True)
+
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), unique=True)
     user = db.relationship('User', back_populates='user_info')

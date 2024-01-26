@@ -62,6 +62,23 @@ def configure_routes(app):
     def update_user_info():
         user_full_name = request.form.get('user_full_name')
         user_email = request.form.get('user_email')
+        user_favorite_genres = request.form.get('favorite_genres')
+        user_favorite_instrument = request.form.get('favorite_instrument')
+        user_job = request.form.get('job')
+
+        user_twitter = request.form.get('twitter')
+        user_facebook = request.form.get('facebook')
+        user_instragram = request.form.get('isntagram')
+
+        if user_instragram:
+            if not user_instragram.startswith("https://"):
+                user_instragram= f"https://{user_instragram}"
+        if user_twitter:
+            if not user_twitter.startswith("https://"):
+                user_twitter= f"https://{user_twitter}"
+        if user_facebook:
+            if not user_facebook.startswith("https://"):
+                user_facebook= f"https://{user_facebook}"  
 
         user_info = UserInfo.query.filter_by(user_id=current_user.id).first()
 
@@ -70,6 +87,14 @@ def configure_routes(app):
 
         user_info.name = user_full_name
         user_info.email = user_email
+        user_info.favorite_genres = user_favorite_genres
+        user_info.favorite_instrument = user_favorite_instrument
+        user_info.job = user_job
+
+        user_info.facebook= user_facebook
+        user_info.twitter = user_twitter
+        user_info.instagram = user_instragram
+        print(user_info.facebook)
 
         db.session.add(user_info)
         db.session.commit()
