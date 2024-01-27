@@ -68,7 +68,7 @@ def configure_routes(app):
 
         user_twitter = request.form.get('twitter')
         user_facebook = request.form.get('facebook')
-        user_instragram = request.form.get('isntagram')
+        user_instragram = request.form.get('instagram')
 
         if user_instragram:
             if not user_instragram.startswith("https://"):
